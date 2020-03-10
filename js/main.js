@@ -1,5 +1,6 @@
 let game;
 game = new Game();
+game.createWatermark()
 game.registerAdminAccount()
 if (game.checkLogin()) {
     game.createlobby()

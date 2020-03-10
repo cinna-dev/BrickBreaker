@@ -1652,6 +1652,7 @@ class Game {
     }
 
     createlobby() {
+
         this.aiActive = false;
         this.aiLifes = 6;
         const container = document.getElementById('container')
@@ -1809,32 +1810,34 @@ class Game {
     }
 
     registerAdminAccount() {
-        if(!this.adminModu)return
+        if (!this.adminModu) return
         let check;
         let data;
-        let account
-        data = JSON.parse(localStorage.getItem('data'))
-        if (data == null) {
-            check = true;
-            data = [];
-        } else {
-            data.forEach((acc) => {
-                if (acc.accountName === 'Admin') {
-                    account = acc
-                    check = false;
-                }
-            })
-        }
-        if (check) {
-            account = new Account('Admin', 'asmin', 'admin', 'admin@admin.com', 1111, 0, (data == null ? 0 : data.length), true, true, false, true, true, 16.67, false, true, true);
-            data.push(account);
-            localStorage.setItem('data', JSON.stringify(data))
+       let account;
+      
+            data = JSON.parse(localStorage.getItem('data'))
+            if (data == null) {
+                check = true;
+                data = [];
+            } else {
+                data.forEach((acc) => {
+                    if (acc.accountName === 'Admin') {
+                        account = acc
+                        check = false;
+                    }
+                })
+            }
+            if (check) {
+                account = new Account('Admin', 'asmin', 'admin', 'admin@admin.com', 1111, 0, (data == null ? 0 : data.length), true, true, false, true, true, 16.67, false, true, true);
+                data.push(account);
+                localStorage.setItem('data', JSON.stringify(data))
 
-        }
-        this.createNavbar('main')
-        this.logIn(account)
-        //this.addNavAccount()
-        this.createlobby()
+            }
+            this.createNavbar('main')
+            this.logIn(account)
+            //this.addNavAccount()
+            this.createlobby()
+     
     }
 
     StartGameHandler(e) {
@@ -2170,6 +2173,13 @@ class Game {
         e.preventDefault()
     }
 
+    createWatermark() {
+        const watermark = document.createElement('div')
+        watermark.textContent = 'by Philipp Puls @ FBW4';
+        watermark.id = 'watermark';
+        // document.getElementById('container').append(watermark);
+        document.body.append(watermark);
+    }
 }
 
 class Account {
